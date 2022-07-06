@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "stimulus-password-visibility": "^2.0.0"
+  }
+}

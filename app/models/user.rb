@@ -11,5 +11,6 @@
 class User < ApplicationRecord
     has_secure_password
 
-    validates :email, presence: true, format: { with: /\A[^@\s]+[^@\s]+\z/, message: "Debe ser un correo electrónico válido!" }
+    validates :email, presence: true
+    validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create, message: "Debe ser un correo electrónico válido!"
 end

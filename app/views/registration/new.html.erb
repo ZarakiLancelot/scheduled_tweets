@@ -1,13 +1,24 @@
 <h1>SIGN UP</h1>
 
 <%= form_with model: @user, url: sign_up_path do |form| %>
+    <% if @user.errors.any? %>
+        <div class="alert alert-danger">
+            <% @user.errors.full_messages.each do |message| %>
+                <div>
+                    <%= message %>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+
     <div class="mb-3">
         <%= form.label :email %>
         <%= form.text_field :email, class: "form-control", placeholder: "mail@mail.com" %>
     </div>
-    <div class="mb-3">
+    <div class="group mb-3">
         <%= form.label :password %>
-        <%= form.password_field :password, class: "form-control", placeholder: "password" %>
+        <%= form.password_field :password, {class: "form-control", placeholder: "password"} %>
+        <%# <span><%= svgicon('eye', class: 'fill-current')</span> %>
     </div>
     <div class="mb-3">
         <%= form.label :password_confirmation %>
@@ -18,3 +29,23 @@
         <%= form.submit "Sign Up", class: "btn btn-primary" %>
     </div>
 <% end %>
+
+<%# <script>
+    const togglePassword = document.querySelector("#togglePassword");
+    const password = document.querySelector("#user_password");
+
+    togglePassword.addEventListener("click", function () {
+        // toggle the type attribute
+        const type = password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+        
+        // toggle the icon
+        this.classList.toggle("bi-eye");
+    });
+
+    // prevent form submit
+    const form = document.querySelector("form");
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+    });
+</script> %>
